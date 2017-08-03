@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
   var submit = document.getElementById("submit");
   submit.addEventListener("click", function(e){
+    e.preventDefault();
     window.round = 0;
     var currentWord = document.getElementById("current-word-word")
     createScore(currentWord.innerHTML);

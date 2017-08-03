@@ -33,7 +33,6 @@ class Die{
 
   isValidClick(){
     var neighbors = this.neighbors;
-    debugger
     var neighborMap = neighbors.map(function(el){
       return el.classList.contains("last");
     })
@@ -43,6 +42,7 @@ class Die{
   render(el){
     var die = document.createElement("div");
     die.classList.add("die");
+    die.classList.add("bold");
     die.innerHTML = this.currentValue;
     die.addEventListener("click", this.onClick.bind(this))
     el.appendChild(die);
