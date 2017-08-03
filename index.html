@@ -3,9 +3,23 @@
   <head>
     <meta charset="utf-8">
     <title>Boggle</title>
+    <link rel="stylesheet" href="/style.css">
     <script src="./javascripts/bundle.js"></script>
   </head>
   <body>
+    <div id="container">
+      <div id="logo"></div>
 
+      <div id="board"></div>
+
+      <div id="submit-holder"><div id="current-word">Current Word: <div id="current-word-word"></div></div> <div id="submit">Submit Word</div></div>
+
+      <div id="score">
+        <ul id="word-pairs">
+          <li id="word-pair-start" class="word-pair"><div class="word bold">Word</div><div class="value bold">Score</div></li>
+          <li id="word-pair-end" class="word-pair"><div class="word bold">Total:</div><div class="value bold">0</div></li>
+        </ul>
+      </div>
+    </div>
   </body>
 </html>
