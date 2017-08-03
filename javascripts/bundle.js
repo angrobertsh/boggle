@@ -79,7 +79,9 @@ document.addEventListener("DOMContentLoaded", function(){
     e.preventDefault();
     window.round = 0;
     var currentWord = document.getElementById("current-word-word")
-    createScore(currentWord.innerHTML);
+    if(currentWord.innerHTML.length != 0){
+      createScore(currentWord.innerHTML);
+    }
     currentWord.innerHTML = "";
     board.clearActiveDice();
   })

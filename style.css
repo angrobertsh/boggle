@@ -8,7 +8,7 @@ span, article, footer, time, small {
   padding: 0;
   border: 0;
   outline: 0;
-  font: inherit;
+  font-family: Helvetica;
   color: inherit;
   text-align: inherit;
   text-decoration: inherit;
@@ -76,6 +76,7 @@ input[type="submit"] {
 #submit-holder{
   width: 320px;
   justify-content: space-between;
+  align-items: center;
   display: flex;
   margin: 10px 0 15px 0;
 }
@@ -97,10 +98,62 @@ input[type="submit"] {
 #board{
   width: 320px;
   height: 320px;
-  border: 4px solid #FFCA08;
+  border: 5px solid #FFCA08;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 30px 0 20px 0;
   background-color: #398BD4;
+}
+
+#submit{
+  padding: 3px 10px 3px 10px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid rgba(0,0,0,0.63);
+}
+
+#score-holder{
+  width: 320px;
+}
+
+#word-pairs{
+  border: 5px solid #FFCA08;
+}
+
+#score{
+  width: 65%;
+}
+
+.word-pair > *{
+  padding: 5px;
+  background-color: white;
+}
+
+.word{
+  width: 130px;
+}
+
+.value{
+  width: 50px;
+  border-left: 5px solid #FFCA08;
+}
+
+.word-pair{
+  border-top: 5px solid #FFCA08;
+}
+
+#word-pair-start{
+  border-top: none;
+}
+
+#word-pair-end{
+  border-top: none;
+  border-left: 5px solid #FFCA08;
+  border-right: 5px solid #FFCA08;
+  border-bottom: 5px solid #FFCA08;
+}
+
+#word-pair-end > * {
+  background-color: #ACCEEC
 }
