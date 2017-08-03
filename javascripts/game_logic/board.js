@@ -1,3 +1,5 @@
+var Die = require('./die');
+
 var BOGGLE_DICE_VALUES = [
   "aaafrs".toUpperCase().split(""),
   "aaeeee".toUpperCase().split(""),
@@ -28,25 +30,29 @@ var BOGGLE_DICE_VALUES = [
 
 
 class Board{
-  constructor(){
+  constructor(boardEl){
     this.positions = [[], [], [], [] ,[]];
+    this.boardEl = boardEl;
     this.initializeDice();
+    this.shake();
   }
 
   initializeDice(){
-    BOGGLE_DICE_VALUES.forEach((value, idx) => {
-      this.positions[idx % 5].push(new Dice(value));
+    var that = this;
+    BOGGLE_DICE_VALUES.forEach(function(value, idx){
+      that.positions[idx % 5].push(new Die(value));
     })
   }
 
   shake(){
     this.scrambleDice();
     this.scramblePositions();
+    this.render(this.boardEl);
   }
 
   scrambleDice(){
-    this.positions.forEach((position) => {
-      position.forEach((die) => {
+    this.positions.forEach(function(position){
+      position.forEach(function(die){
         die.roll();
       })
     })
@@ -66,8 +72,50 @@ class Board{
     }
   }
 
-  render(){
+  setAllNeighbors(){
+    var currentNeighbors = [];
+    var a = [];
+    for(var i = 0; i < this.positions.length; i += 1){
+      for(var j = 0; j < this.positions[i].length; j += 1){
+        currentNeighbors = [];
+        currentNeighbors.push(document.getElementsByClassName("row")[i].children[j+1]);
+        currentNeighbors.push(document.getElementsByClassName("row")[i].children[j-1]);
+        if(this.positions[i+1]){
+          currentNeighbors.push(document.getElementsByClassName("row")[i+1].children[j+1]);
+          currentNeighbors.push(document.getElementsByClassName("row")[i+1].children[j-1]);
+          currentNeighbors.push(document.getElementsByClassName("row")[i+1].children[j]);
+        }
+        if(this.positions[i-1]){
+          currentNeighbors.push(document.getElementsByClassName("row")[i-1].children[j+1]);
+          currentNeighbors.push(document.getElementsByClassName("row")[i-1].children[j-1]);
+          currentNeighbors.push(document.getElementsByClassName("row")[i-1].children[j]);
+        }
+        this.positions[i][j].setNeighbors(currentNeighbors.filter(function(el){return el!==undefined }));
+      }
+    }
+  }
 
+  clearActiveDice(){
+    var rows = document.getElementsByClassName("row");
+    for(var i = 0; i < rows.length; i += 1){
+      for(var j = 0; j < rows[i].children.length; j += 1){
+        rows[i].children[j].classList.remove("active")
+      }
+    }
+  }
+
+  render(boardEl){
+    this.positions.forEach(function(positions, idx){
+      var row = document.createElement("div");
+      row.classList.add("row")
+      positions.forEach(function(die, idx){
+        die.render(row);
+      })
+      boardEl.appendChild(row);
+    })
+    this.setAllNeighbors();
   }
 
 }
+
+module.exports = Board;
